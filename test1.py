@@ -1,20 +1,28 @@
 import cv2
 import numpy as np
-cap = cv2.VideoCapture(0)
 #Import only if not previously imported
-if cap.isOpened()==False:
+
+#Import only if not previously imported
+
+# Create a Video Reader Object.
+cap = cv2.VideoCapture(0)
+if cap.isOpened() == False:
     print("Error in opening video stream or file")
-fourcc=cv.VideoWriter_fourcc("Fourcc Codec Eg-XVID")
-writer = cv2.VideoWriter('14545645.avi',fourcc,30,int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)))
+#Define the codec for the Video
+#fourcc = cv2.VideoWriter_fourcc("Fourcc Codec Eg-XVID")
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+#Create Video Writer Object
+writer = cv2.VideoWriter('14545645.avi',fourcc, 30, (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))))
 while cap.isOpened():
-    ret,frame=cap.read()
+    ret, frame = cap.read()
     if ret:
-        writer.write(frame)
-        cv2.imshow("Frame",frame)
-        if cv2.waitKey(20) & 0xFF==27:
-            break
+         writer.write(frame)
+         cv2.imshow("Frame",frame)
+         # Exit on pressing esc
+         if cv2.waitKey(20) & 0xFF == 27:
+             break
     else:
-        break
+         break
 cap.release()
 writer.release()
-cv2.
+cv2.destroyAllWindows()
