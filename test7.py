@@ -8,7 +8,7 @@ img1 = b[60:70,10:30]
 img2 = b[10:20,70:90]
 print(img1)
 print(img2)
-dst=cv2.addWeighted(img1,0.3,img2,0.7,0)
+dst=cv2.addWeighted(img1,0.9,img2,0.7,0)
 b[10:20,70:90]=dst
 cv2.namedWindow('14545645',cv2.WINDOW_NORMAL)
 cv2.imshow('14545645',img)
