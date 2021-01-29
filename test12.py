@@ -13,7 +13,7 @@ def savexy(event,x,y,flags,param):
         i+=1
 img=cv2.imread('14545645.jpg')
 rows,cols,ch=img.shape
-pts2 = np.float32([[0,0],[300,0],[300,300],[0,300]])
+pts2 = np.float32([[0,0],[300,0],[300,30],[0,300]])
 cv2.namedWindow('image')
 cv2.setMouseCallback('image',savexy)
 while(1):
