@@ -1,27 +1,28 @@
-import cv2 
+import cv2
 import numpy as np
-cap=cv2.VideoCapture(0)
-while(1):
-#获取每一帧 
-    ret,frame=cap.read()
-        
-#换到HSV 
-    hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
-#定蓝色的值 
-    lower_blue=np.array([50,50,50]) 
-    upper_blue=np.array([130,255,255])
+import matplotlib.pylab as plt
 
- cv2.resize   
-#根据值构建掩模 
-    mask=cv2.inRange(hsv,lower_blue,upper_blue)
-#对原图像和掩模位算 
-    res=cv2.bitwise_and(frame,frame,mask=mask)
-#显示图像 
-    cv2.imshow('frame',frame) 
-    cv2.imshow('mask',mask) 
-    cv2.imshow('res',res) 
-    k=cv2.waitKey(5)&0xFF 
-    if k==27: 
-        break
-#关窗口 
-cv2.destroyAllWindows()
+img = cv2.imread('14545645.jpg')
+rows, cols, ch = img.shape
+
+# 设置标记点和目标点
+markpoint = [[93, 651], [20, 197], [788, 540], [665, 20]]
+dstpoint = [[0, 0], [352, 0], [0, 500], [352, 500]]
+
+# 强调标记点
+for i in markpoint:
+    cv2.circle(img, tuple(i), 10, (0, 255, 0), -1)
+
+# 转换点的格式
+pts1 = np.float32(markpoint)
+pts2 = np.float32(dstpoint)
+
+# 生成透视矩阵
+M = cv2.getPerspectiveTransform(pts1, pts2)
+
+# 转换
+dst = cv2.warpPerspective(img, M, (352, 500))
+
+plt.subplot(121), plt.imshow(img), plt.title('Input')
+plt.subplot(122), plt.imshow(dst), plt.title('Output')
+plt.show()
