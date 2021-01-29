@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 img = cv2.imread('test13.jpg', 0)
 img = cv2.medianBlur(img, 5)  # 中值滤波
 
+                             #改127這一個數字，會有變化
 ret, th1 = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 # 11 为 Block size, 2 为 C 值
 th2 = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
