@@ -4,10 +4,10 @@ from matplotlib import pyplot as plt
 
 font = cv2.FONT_HERSHEY_SIMPLEX  # 设置字体样式
 
-img = cv2.imread('test21_3.jpg')
+img = cv2.imread('test21_1.jpg')
 imgray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, thresh = cv2.threshold(imgray, 127, 255, 0)
-image, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 cnt = contours[0]
 
 # 极点
